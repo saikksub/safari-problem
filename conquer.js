@@ -1,9 +1,17 @@
 function conquer (runtime, position, prevPosition, hunter) {
+  if (hunter.rank < 1) {
+    return
+  }
+
   if (
     runtime.board?.[position.row]?.[position.col] &&
     runtime.board[position.row][position.col].isDead()
   ) {
     return false
+  }
+
+  if (hunter.canKilled(hunter.rank)) {
+    hunter.kill(hunter.rank)
   }
 
   const nearby = {

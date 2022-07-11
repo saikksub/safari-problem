@@ -1,10 +1,11 @@
-const random = require('random')
+const random = require('random') // To generate random numbers
 const prompt = require('prompt-sync')({
   sigint: true
 })
 const Safari = require('./Safari')
 const conquer = require('./conquer')
 
+// List of available animals
 const WildAnimals = [Safari.Lion, Safari.Tiger, Safari.Wolf, Safari.Deer]
 
 const selection = {
@@ -14,8 +15,10 @@ const selection = {
 
 const runtime = {
   size: {
-    row: 10,
-    col: 10
+    // For some reason,
+    // if I increase the row and column size (say 100x100), the output is not valid
+    row: 4,
+    col: 4
   },
   board: [], 
   getRandom () {
