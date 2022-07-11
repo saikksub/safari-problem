@@ -4,12 +4,22 @@ class Animal {
     this.name = ''
   }
 
-  kill (obj) {
-    return rank > obj?.rank || -1
+  #dead = false
+
+  canKilled (rank) {
+    return rank >= this.rank
+  }
+
+  kill (rank) {
+    return this.canKilled(rank) ? this.#dead = true : false
+  }
+
+  isDead () {
+    return this.#dead
   }
 
   getShortName () {
-    return this.name.trim().split('')[0] || ''
+    return this.#dead ? '_' : this.name.trim().split('')[0] || ''
   }
 }
 

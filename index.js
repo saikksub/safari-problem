@@ -3,8 +3,14 @@ const prompt = require('prompt-sync')({
   sigint: true
 })
 const Safari = require('./Safari')
+const conquer = require('./conquer')
 
 const WildAnimals = [Safari.Lion, Safari.Tiger, Safari.Wolf, Safari.Deer]
+
+const selection = {
+  row: -1,
+  col: -1
+}
 
 const runtime = {
   size: {
@@ -12,10 +18,6 @@ const runtime = {
     col: 5
   },
   board: [], 
-  selection: {
-    row: -1,
-    col: -1
-  },
   getRandom () {
     return random.int((min = 0), (max = 3)) 
   },
@@ -58,12 +60,34 @@ const runtime = {
       console.log(`Select column between 1 to ${this.size.col}\n\n`)
       return this.selectCell()
     }
+
+    selection.row = row - 1
+    selection.col = col - 1
   },
-  conquer () {}
+  conquer
 }
 
-runtime.randomizeBoard()
-runtime.printBoard()
-runtime.selectCell()
+async function main () {
+  runtime.randomizeBoard()
+  runtime.printBoard()
 
-runtime.
+  runtime.selectCell()
+
+  if (selection.row < 0 || selection.col < 0) {
+    runtime.printBoard()
+    return
+  }
+  
+  const hunter = runtime.board[selection.row][selection.col]
+  const prevPosition = selection
+
+  runtime.conquer(
+    runtime,
+    selection,
+    prevPosition,
+    hunter
+  )
+  runtime.printBoard()
+}
+
+main()
