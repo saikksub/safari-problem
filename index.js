@@ -15,10 +15,8 @@ const selection = {
 
 const runtime = {
   size: {
-    // For some reason,
-    // if I increase the row and column size (say 100x100), the output is not valid
-    row: 4,
-    col: 4
+    row: 10,
+    col: 10
   },
   board: [], 
   getRandom () {
@@ -90,6 +88,10 @@ async function main () {
     prevPosition,
     hunter
   )
+
+  if (hunter.canKilled(hunter.rank)) {
+    hunter.kill(hunter.rank)
+  }
   runtime.printBoard()
 }
 

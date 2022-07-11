@@ -10,10 +10,6 @@ function conquer (runtime, position, prevPosition, hunter) {
     return false
   }
 
-  if (hunter.canKilled(hunter.rank)) {
-    hunter.kill(hunter.rank)
-  }
-
   const nearby = {
     top: {
       position: {
@@ -82,14 +78,14 @@ function conquer (runtime, position, prevPosition, hunter) {
     nearby.topRight,
     nearby.bottomLeft,
     nearby.bottomRight
-  ].filter(x => x.hunt?.canKilled(hunter.rank))
+  ].filter(x => x.hunt ? x.hunt.canKilled(hunter.rank) : false)
 
   for (let index = 0; index < nodes.length; index ++) {
     const node = nodes[index]
-    if (
-      prevPosition.row !== node.position.row &&
-      prevPosition.col !== node.position.col
-    ) {
+    if (!(
+      prevPosition.row == node.position.row &&
+      prevPosition.col == node.position.col
+    )) {
       conquer(runtime, node.position, position, hunter)
     }
     node.hunt.kill(hunter.rank)

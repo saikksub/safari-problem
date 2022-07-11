@@ -7,7 +7,7 @@ class Animal {
   #dead = false
 
   canKilled (rank) {
-    return rank >= this.rank
+    return rank > this.rank
   }
 
   kill (rank) {
