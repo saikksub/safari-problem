@@ -14,8 +14,8 @@ const selection = {
 
 const runtime = {
   size: {
-    row: 5,
-    col: 5
+    row: 10,
+    col: 10
   },
   board: [], 
   getRandom () {
